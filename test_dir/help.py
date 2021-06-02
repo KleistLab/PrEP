@@ -7,7 +7,7 @@ import sys
 
 def process(file):
     df = pd.read_csv(file, index_col=0)
-    df = df.apply(lambda x: np.round(x, 8), axis=1)
+    df = df.apply(lambda x: np.round(x, 6), axis=1)
     df.to_csv(file)
 
 

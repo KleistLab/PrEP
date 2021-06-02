@@ -4,7 +4,7 @@ test:test-ntm test-ctsm test-pgs
 
 .PHONY:data-ntm
 data-ntm:
-	@../prophylaxisEstimator.py ntm --inputfile ../PK_default.csv
+	@../prophylaxisEstimator.py ntm --inputfile ../PK_default.csv --timesteps 10 10 1
 	@./help.py ntm.csv
 
 .PHONY:test-ntm
