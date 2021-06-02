@@ -4,21 +4,22 @@
 import numpy as np
 import pandas as pd
 from scipy.integrate import solve_ivp
-import math, sys
+import sys
 from .sample import Sample
 from .utils import *
 
 
 def get_a5(sample, t, m_dose, count_doses, adherence):
 
-    '''
+    """
     function to get the value of a5, for solving ODEs
 
     return the value of a5 at time point t
-    '''
+    """
 
     D = sample.getConcentration(m_dose, t, adherence, count_doses)
     return getPropensities([1,1,1], D)[5]
+
 
 def peModel(t, y, a, sample, m_dose, count_doses, adherence, if_ll=False):
 
@@ -56,7 +57,7 @@ def peModel(t, y, a, sample, m_dose, count_doses, adherence, if_ll=False):
 def solvePE_pgs(sample, t_start, t_end, m_dose, count_doses, adherence,
                 if_ll=False, p10=0.9017, p20=0.5212, p30=0.01496, t_extend=100):
 
-    '''
+    """
     solve ODE for extinction probability based on a concentration-time curve
 
     return bunch object containing solutions
@@ -71,13 +72,11 @@ def solvePE_pgs(sample, t_start, t_end, m_dose, count_doses, adherence,
     p10, p20, p30: initial condition (extinction probabilities) for solving ODE
     (here constants are used, but I just keep these as input for the further
     functional extension)
-    '''
+    """
 
     # reset the sample, in case the concentration profile already exists
     sample.reset()
     m_dose *= 1e6     # convert the mass into ng
-
-    
     t_end += t_extend
     a = getPropensities([1,1,1], 0)
     t = [t_end, t_start]
@@ -86,6 +85,7 @@ def solvePE_pgs(sample, t_start, t_end, m_dose, count_doses, adherence,
                     args=[a, sample, m_dose, count_doses, adherence, if_ll],
                     dense_output=True)
     return sol
+
 
 def run_pgs(mdose, cdose, adh, inputfile, ts, te, tspanres, if_ll):
     df_sample = pd.read_csv(inputfile)

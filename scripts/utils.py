@@ -23,8 +23,6 @@ def getPropensities(Y, D, if_ll=False):
                                os.pardir, 'config', 'config.ini'))
     config.read(filepath)
 
-
-
     P_Ma4 = float(config['viraldynamics']['P_Ma4'])
     P_La5 = float(config['viraldynamics']['P_La5'])
     IC50 = float(config['viraldynamics']['IC50'])
@@ -100,6 +98,7 @@ def getExtinctionProbability(Y, D, if_ll=False):
 
     return PE, [PE_v, PE_t1, PE_t2]
 
+
 def transmittedVirusCount(is_homo=True):
     """Get the number virus entering a replication-competent compartment
     according to the transmission mode.
@@ -110,7 +109,7 @@ def transmittedVirusCount(is_homo=True):
     """
 
     config = configparser.ConfigParser()
-    filepath = os.path.abspath(os.path.join(os.path.dirname( __file__ ),
+    filepath = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                os.pardir, 'config', 'config.ini'))
     config.read(filepath)
 

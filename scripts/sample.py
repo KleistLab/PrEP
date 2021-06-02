@@ -100,8 +100,7 @@ class Sample:
          return value: concentration of DTG at time point tp
 
          m_DTG: mass of oral taken DTG [ng]
-         tp: time point relative to first dosing [hr] (exposure occurs)
-            (can be negative, time before dosing)
+         tp: time point relative to first dosing [hr] (can be negative, time before dosing)
          adherence: possibility to take drug
          count_doses: count of doses in a regimen
          adh_pattern: a list contains 0 and 1 for adherence pattern, length is count_doses. 

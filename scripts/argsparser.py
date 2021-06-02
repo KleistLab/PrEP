@@ -58,11 +58,11 @@ def parse_arguments():
 
     parent_parser_deterministic12 = argparse.ArgumentParser(add_help=False)
     parent_parser_deterministic12.add_argument('--timesteps', type=number,
-                        default=[10,10,1],
+                        default=[1, 1, 1],
                         nargs=3, help='time steps for V, T1, T2,  [min] \
                         Fraction like 1/6 is allowed. For V and T1 the time \
                         steps should be same and cannot be shorter than T2 \
-                        (default: 10 10 1)')
+                        (default: 1 1 1)')
 
     parser = argparse.ArgumentParser(
         description='Compute prophylactic efficacy for DTG',
@@ -80,33 +80,31 @@ def parse_arguments():
                     formatter_class=argparse.MetavarTypeHelpFormatter,
                     parents=[parent_parser])
     parser_ntm = subparsers.add_parser(
-                            'ntm',
-                            help='run next transition method',
-                            description='next transition method',
-                            usage='{} ntm [<options>]'.format(sys.argv[0]),
-                            formatter_class=argparse.MetavarTypeHelpFormatter,
-                            parents=[parent_parser, parent_parser_deterministic,
-                            parent_parser_deterministic12])
+                    'ntm',
+                    help='run next transition method',
+                    description='next transition method',
+                    usage='{} ntm [<options>]'.format(sys.argv[0]),
+                    formatter_class=argparse.MetavarTypeHelpFormatter,
+                    parents=[parent_parser, parent_parser_deterministic, parent_parser_deterministic12])
 
-    parser_ctsm = subparsers.add_parser('ctsm',
-                            help='run constant time step method',
-                            description='constant time step method',
-                            usage='{} ctsm [<options>]'.format(sys.argv[0]),
-                            formatter_class=argparse.MetavarTypeHelpFormatter,
-                            parents=[parent_parser, parent_parser_deterministic,
-                            parent_parser_deterministic12])
-    parser_pgs = subparsers.add_parser('pgs',
-                            help='run probability generating system',
-                            description='probability generating system',
-                            usage='{} pgs [<options>]'.format(sys.argv[0]),
-                            formatter_class=argparse.MetavarTypeHelpFormatter,
-                            parents=[parent_parser, parent_parser_deterministic])
-
-
+    parser_ctsm = subparsers.add_parser(
+                    'ctsm',
+                    help='run constant time step method',
+                    description='constant time step method',
+                    usage='{} ctsm [<options>]'.format(sys.argv[0]),
+                    formatter_class=argparse.MetavarTypeHelpFormatter,
+                    parents=[parent_parser, parent_parser_deterministic, parent_parser_deterministic12])
+    parser_pgs = subparsers.add_parser(
+                    'pgs',
+                    help='run probability generating system',
+                    description='probability generating system',
+                    usage='{} pgs [<options>]'.format(sys.argv[0]),
+                    formatter_class=argparse.MetavarTypeHelpFormatter,
+                    parents=[parent_parser, parent_parser_deterministic])
 
     parser_extr.add_argument('--csimul', type=int, default=5000,
                         help='count of simulations (default: 5000)')
-    parser_extr.add_argument('--tps', type=list, default=[1,6,18,23],
+    parser_extr.add_argument('--tps', type=list, default=[1, 6, 18, 23],
                         help='time points to begin simulation, i.e. \
                         time of viral exposure relative to timing \
                         of first dose [hr] (default: [1,6,18,23])')
@@ -117,8 +115,6 @@ def parse_arguments():
     parser_ntm.add_argument('--rate', type=float, default=0.999,
                         help='percentage of the observed next transition \
                         (default: 0.999)')
-
-
 
     args = parser.parse_args()
     return args

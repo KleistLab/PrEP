@@ -75,7 +75,7 @@ optional arguments:
   --timesteps number number number
                         time steps for V, T1, T2, [min] Fraction like 1/6 is
                         allowed. For V and T1 the time steps should be same
-                        and cannot be shorter than T2 (default: 10 10 1)
+                        and cannot be shorter than T2 (default: 1 1 1)
   --rate float          percentage of the observed next transition (default:
                         0.999)
 
@@ -109,7 +109,7 @@ optional arguments:
   --timesteps number number number
                         time steps for V, T1, T2, [min] Fraction like 1/6 is
                         allowed. For V and T1 the time steps should be same
-                        and cannot be shorter than T2 (default: 10 10 1)
+                        and cannot be shorter than T2 (default: 1 1 1)
 ```
 
 ### pgs

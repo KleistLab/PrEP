@@ -3,7 +3,7 @@
 
 import numpy as np
 import pandas as pd
-import math
+import sys
 from .sample import Sample
 from .utils import *
 
@@ -31,7 +31,6 @@ def solvePE_ntm(sample, t_start, t_end, m_dose, count_doses,
     sample.reset()
     t_end += t_extend
 
-
     def computeSteps(recall_rate, timestep):
         """
         compute the look-forward horizons according to delta
@@ -43,7 +42,6 @@ def solvePE_ntm(sample, t_start, t_end, m_dose, count_doses,
         k2 = math.ceil(-math.log(1 - recall_rate) / a[2] / timestep * 60)
         k3 = math.ceil(-math.log(1 - recall_rate) / (a[6] + a[3]) / timestep*60)
         return k1, k2, k3
-
 
     k1, k2, k3 = computeSteps(recall_rate, timestep)    # look-forward horizons
     if t_start < 0:     # if PEP is required
@@ -69,13 +67,13 @@ def solvePE_ntm(sample, t_start, t_end, m_dose, count_doses,
                                                         t_end*60+k2*timestep,
                                                         timestep)]
     # propensities
-    sample_a0 = getPropensities([1,1,1], 0)
+    sample_a0 = getPropensities([1, 1, 1], 0, if_ll=if_ll)
     # extinction probabilities without drug, for initialization
-    PE_v_0, PE_t1_0, PE_t2_0 = getExtinctionProbability([1,0,0], 0)[1]
+    PE_v_0, PE_t1_0, p30 = getExtinctionProbability([1, 0, 0], 0, if_ll=if_ll)[1]
     # initialize the output arrays
     p1 = [PE_v_0] * (len(sample_c) + 1)
     p2 = [PE_t1_0] * (len(sample_c) + 1)
-    p3 = [PE_t2_0] * (len(sample_c) + 1)
+    p3 = [p30] * (len(sample_c) + 1)
 
     # an array of a5 values, computed from sample_c
     a5 =[getPropensities([1, 1, 1], max(i, 0))[5] for i in sample_c]
