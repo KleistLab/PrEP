@@ -26,6 +26,7 @@ command:
 Run './prophylaxisEstimator.py COMMAND --help' for more information on a command
 ```
 ### extrande
+(Default setup may take hour to run)
 ```
 usage: ./prophylaxisEstimator.py extrande [options]
 
@@ -49,6 +50,7 @@ optional arguments:
                     transition mode (default: 1)
 ```
 ### ntm
+(Default setup may take several minutes to run)
 ```
 usage: ./prophylaxisEstimator.py ntm [<options>]
 
@@ -75,7 +77,7 @@ optional arguments:
   --timesteps number number number
                         time steps for V, T1, T2, [min] Fraction like 1/6 is
                         allowed. For V and T1 the time steps should be same
-                        and cannot be shorter than T2 (default: 1 1 1)
+                        and cannot be shorter than T2 (default: 10 10 1)
   --rate float          percentage of the observed next transition (default:
                         0.999)
 
@@ -109,7 +111,7 @@ optional arguments:
   --timesteps number number number
                         time steps for V, T1, T2, [min] Fraction like 1/6 is
                         allowed. For V and T1 the time steps should be same
-                        and cannot be shorter than T2 (default: 1 1 1)
+                        and cannot be shorter than T2 (default: 10 10 1)
 ```
 
 ### pgs
@@ -147,6 +149,10 @@ while extrande can be used to obtain the intermediate state
 * Uses sane defaults, also provide many possible options
 
 ## About
+### Environment: 
+The file config/env.yml can be used to create a (across-platform) conda environment 
+that contains the necessary packages.
+
 ### Running tests
 ```sh
 $ cd test_dir
